@@ -53,7 +53,7 @@ class Idm
     {
         RMSVerify.checkNull(caller, "caller cannot be null");
 
-        if (caller.getType() == Caller.Type.VISITOR)
+        if (caller.getType() == Caller.Type.GUEST)
             return Result.VALID;
 
         SessionResponse sessionRM = checkSession(caller);
@@ -100,7 +100,7 @@ class Idm
     private SessionResponse checkSession(@Nonnull Caller caller)
     {
         RMSVerify.checkNull(caller, "caller cannot be null");
-        RMSVerify.argument(caller.getType() == Caller.Type.VISITOR, "Cannot call checkSession() on Visitor");
+        RMSVerify.argument(caller.getType() == Caller.Type.GUEST, "Cannot call checkSession() on Visitor");
 
         ServiceSocket socket = socketFactory.createSocket(sessionEP)
                 .headers(caller.toHeader());

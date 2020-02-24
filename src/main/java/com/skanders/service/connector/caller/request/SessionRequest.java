@@ -32,10 +32,8 @@ public class SessionRequest extends RequestModel
 
     @JsonCreator
     public SessionRequest(
-            @JsonProperty(value = "email", required = true)
-            String email,
-            @JsonProperty(value = "sessionToken", required = true)
-            String sessionToken)
+            @JsonProperty(value = "email", required = true) String email,
+            @JsonProperty(value = "sessionToken", required = true) String sessionToken)
     {
         this.email = email;
         this.sessionToken = sessionToken;

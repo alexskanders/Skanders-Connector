@@ -32,7 +32,7 @@ public class Caller
     public static final String TRANSACTION_TOKEN = "transaction-token";
     public static final String SESSION_TOKEN     = "session-token";
 
-    public enum Type { USER, VISITOR }
+    public enum Type { USER, GUEST}
 
     private String ipAddress;
     private String transactionToken;
@@ -54,7 +54,7 @@ public class Caller
 
         this.sessionTokenUpdated = false;
 
-        this.type = Type.VISITOR;
+        this.type = Type.GUEST;
     }
 
     Caller(String ipAddress, String transactionToken, String email, String sessionToken)
@@ -109,7 +109,7 @@ public class Caller
 
     public Result validate()
     {
-        return type == Type.VISITOR ? validateVisitor() : validateUser();
+        return type == Type.GUEST ? validateVisitor() : validateUser();
     }
 
     private Result validateUser()
