@@ -4,7 +4,7 @@
 
     <groupId>com.skanders.service</groupId>
     <artifactId>skanders-connector</artifactId>
-    <version>0.8.0</version>
+    <version>0.8.1-SNAPSHOT</version>
 
     <name>Skanders Connector</name>
     <description>Classes to connect different services utilizing Skanders-Idm, Skanders-Gateway and Rapid MicroService</description>
@@ -38,7 +38,7 @@
         <connection>scm:git:ssh://git@github.com/alexskanders/Skanders-Connector.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/alexskanders/Skanders-Connector.git</developerConnection>
         <url>http://github.com/alexskanders/Skanders-Connector/tree/master</url>
-        <tag>skanders-connector-0.8.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
