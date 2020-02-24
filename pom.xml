@@ -6,7 +6,7 @@
 
     <groupId>com.skanders.service</groupId>
     <artifactId>skanders-connector</artifactId>
-    <version>0.8.0</version>
+    <version>0.8.1-SNAPSHOT</version>
 
     <name>Skanders Connector</name>
     <description>Classes to connect different services utilizing Skanders-Idm, Skanders-Gateway and Rapid MicroService</description>
