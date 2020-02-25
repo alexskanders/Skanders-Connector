@@ -32,24 +32,35 @@ public class Privilege
 
     public static final int USER = 100;
 
-    public static void validate(String level)
+    public static final int GUEST = Integer.MAX_VALUE;
+
+    public static int validate(String level)
     {
         switch (level.toUpperCase().trim()) {
             case "ROOT":
+                return ROOT;
             case "OWNER":
+                return OWNER;
             case "ADMIN":
+                return ADMIN;
             case "MANAGER":
+                return MANAGER;
             case "ENGINEER":
+                return ENGINEER;
             case "USER":
-                break;
+                return USER;
+            case "GUEST":
+                return GUEST;
             default:
                 try {
                     int intLevel = Integer.parseInt(level);
 
-                    if (intLevel >= ROOT && intLevel <= ENGINEER || intLevel == USER)
-                        break;
+                    if (intLevel >= ROOT && intLevel <= ENGINEER || intLevel == USER || intLevel == GUEST)
+                        return intLevel;
                     else if (intLevel < 1)
                         throw new RMSException("Privilege level is invalid, custom level must be greater than 0, given: " + intLevel);
+                    else
+                        return intLevel;
 
                 } catch (NumberFormatException e) {
                     throw new RMSException("Privilege level is invalid: " + level);
