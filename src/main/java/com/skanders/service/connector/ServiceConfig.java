@@ -30,13 +30,11 @@ public class ServiceConfig extends RMSConfig
 
     private void initIdmConnector(RMSProperties prop)
     {
-        String idmUrl            = prop.getReqStr("idm.url");
-        String idmSessionEP      = prop.getReqStr("idm.sessionEP");
-        String idmPrivilegeEP    = prop.getReqStr("idm.privilegeEP");
+        String idmUrl = prop.getReqStr("connector.idm.url");
 
-        String idmTrustStoreFile = prop.getStr("idm.trustStoreFile");
-        String idmTrustStorePass = prop.getStr("idm.trustStorePass");
+        String idmTrustStoreFile = prop.getStr("connector.idm.trustStoreFile");
+        String idmTrustStorePass = prop.getStr("connector.idm.trustStorePass");
 
-        Service.initIdm(idmUrl, idmSessionEP, idmPrivilegeEP, idmTrustStoreFile, idmTrustStorePass);
+        Service.initIdm(idmUrl, idmTrustStoreFile, idmTrustStorePass);
     }
 }

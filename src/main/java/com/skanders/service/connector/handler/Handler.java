@@ -14,27 +14,38 @@
  * limitations under the License.
  */
 
-package com.skanders.service.connector.common;
+package com.skanders.service.connector.handler;
 
 import com.skanders.rms.base.model.RequestModel;
 import com.skanders.rms.base.model.ResponseModel;
 import com.skanders.rms.base.result.Result;
 import com.skanders.service.connector.caller.Caller;
-import org.glassfish.jersey.SslConfigurator;
 
-import javax.net.ssl.SSLContext;
+import javax.ws.rs.core.Response;
 
-public class Commons
+public class Handler
 {
-    public static final String PROTOCOL = "TLSv1.2";
-
-    public static SSLContext createSSLContext(String trustStoreFile, String trustStorePass)
+    public static
+    <Req extends RequestModel, Res extends ResponseModel>
+    boolean isValid(Caller caller, Req request, Res response)
     {
-        SslConfigurator configurator = SslConfigurator.newInstance()
-                .trustStoreFile(trustStoreFile)
-                .trustStorePassword(trustStorePass)
-                .securityProtocol(PROTOCOL);
+        Result result;
 
-        return configurator.createSSLContext();
+        result = caller.validate();
+        if (result.notValid(response))
+            return true;
+
+        result = request.validate();
+        return result.notValid(response);
+    }
+
+    public static
+    <Res extends ResponseModel>
+    boolean isValid(Caller caller, Res response)
+    {
+        Result result;
+
+        result = caller.validate();
+        return result.notValid(response);
     }
 }

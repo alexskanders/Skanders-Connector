@@ -16,7 +16,7 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.rms.util.result.Result;
+import com.skanders.rms.base.result.Result;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;

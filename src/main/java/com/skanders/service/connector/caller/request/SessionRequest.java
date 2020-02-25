@@ -19,16 +19,16 @@ package com.skanders.service.connector.caller.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skanders.rms.base.model.RequestModel;
-import com.skanders.rms.util.result.Result;
+import com.skanders.rms.base.result.Result;
 import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 
 public class SessionRequest extends RequestModel
 {
     @JsonProperty("email")
-    private String email;
+    private final String email;
     @JsonProperty("sessionToken")
-    private String sessionToken;
+    private final String sessionToken;
 
     @JsonCreator
     public SessionRequest(
@@ -44,19 +44,9 @@ public class SessionRequest extends RequestModel
         return email;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
     public String getSessionToken()
     {
         return sessionToken;
-    }
-
-    public void setSessionToken(String sessionToken)
-    {
-        this.sessionToken = sessionToken;
     }
 
     public Result validate()

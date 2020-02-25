@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.skanders.service.connector;
+package com.skanders.service.connector.code;
 
-public class Service
+/**
+ * Privilege rolls with levels 1-5 Reserved and User purpose set to level 100
+ * (Lower) to leave room for higher custom levels.
+ */
+public class Privilege
 {
-    public static final Idm IDM;
+    public static final int ROOT = 1;
+    public static final int OWNER = 2;
+    public static final int ADMIN = 3;
+    public static final int MANAGER = 4;
+    public static final int ENGINEER = 5;
 
-    static {
-        IDM = new Idm();
-    }
-
-    static void initIdm(String url, String trustStoreFile, String trustStorePass)
-    {
-        IDM.init(url, trustStoreFile, trustStorePass);
-    }
+    public static final int USER = 100;
 }

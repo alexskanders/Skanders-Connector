@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-package com.skanders.service.connector;
+package com.skanders.service.connector.code;
 
-public class Service
+public class User
 {
-    public static final Idm IDM;
-
-    static {
-        IDM = new Idm();
-    }
-
-    static void initIdm(String url, String trustStoreFile, String trustStorePass)
-    {
-        IDM.init(url, trustStoreFile, trustStorePass);
-    }
+    public static final int ACTIVE = 1;
+    public static final int LOCKED = 2;
+    public static final int CLOSED = 3;
 }

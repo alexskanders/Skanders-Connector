@@ -19,43 +19,38 @@ package com.skanders.service.connector.caller.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skanders.rms.base.model.RequestModel;
-import com.skanders.rms.util.result.Result;
+import com.skanders.rms.base.result.Result;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 
 public class PrivilegeRequest extends RequestModel
 {
-    @JsonProperty("endpoint")
-    private String endpoint;
+    @JsonProperty("level")
+    private final Integer level;
 
     @JsonCreator
     public PrivilegeRequest(
-            @JsonProperty(value = "endpoint", required = true) String endpoint)
+            @JsonProperty(value = "level", required = true) Integer level)
     {
-        this.endpoint = endpoint;
+        this.level = level;
     }
 
-    public String getEndpoint()
+    public Integer getLevel()
     {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint)
-    {
-        this.endpoint = endpoint;
+        return level;
     }
 
     public Result validate()
     {
         Result result;
 
-        result = CallerValidate.endpoint(endpoint);
+        result = CallerValidate.level(level);
             if (result.notValid()) return result;
 
         return Result.VALID;
     }
 
-    public static PrivilegeRequest createModel(String endpoint)
+    public static PrivilegeRequest createModel(Integer level)
     {
-        return new PrivilegeRequest(endpoint);
+        return new PrivilegeRequest(level);
     }
 }

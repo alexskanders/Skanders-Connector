@@ -16,7 +16,7 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.rms.util.result.Result;
+import com.skanders.rms.base.result.Result;
 
 import javax.ws.rs.core.Response.Status;
 
@@ -34,7 +34,7 @@ public final class CallerResult
     public static final Result IP_INVALID;
 
     /* Bad Request Codes */
-    public static final Result ENDPOINT_INVALID;
+    public static final Result PRIVILEGE_LEVEL_INVALID;
     public static final Result PAYLOAD_EMPTY;
     public static final Result ENDPOINT_NOT_FOUND;
 
@@ -66,7 +66,7 @@ public final class CallerResult
         EMAIL_INVALID             = Result.declare(-122, "Email is not valid",             Status.BAD_REQUEST);
         IP_INVALID                = Result.declare(-123, "IP Address is not valid",        Status.BAD_REQUEST);
 
-        ENDPOINT_INVALID          = Result.declare(-130, "Endpoint is missing",           Status.BAD_REQUEST);
+        PRIVILEGE_LEVEL_INVALID   = Result.declare(-130, "Privilege level is missing",     Status.BAD_REQUEST);
         PAYLOAD_EMPTY             = Result.declare(-131, "Payload Was Empty",              Status.BAD_REQUEST);
         ENDPOINT_NOT_FOUND        = Result.declare(-132, "No endpoint found",              Status.BAD_REQUEST);
 

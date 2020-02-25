@@ -16,29 +16,27 @@
 
 package com.skanders.service.connector.caller.validate;
 
+import com.skanders.rms.base.result.Result;
 import com.skanders.rms.def.logger.Pattern;
-import com.skanders.rms.util.result.Result;
-import com.skanders.service.connector.caller.CallerResult;
-import org.apache.commons.validator.routines.EmailValidator;
-import org.apache.commons.validator.routines.InetAddressValidator;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-
 import com.skanders.service.connector.caller.CallerFactory;
+import com.skanders.service.connector.caller.CallerResult;
+import com.skanders.service.connector.common.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CallerValidate
 {
-    private static final InetAddressValidator INET_VALIDATOR = InetAddressValidator.getInstance();
-    private static final EmailValidator EMAIL_VALIDATOR      = EmailValidator.getInstance();
-
     private static final Logger LOG = LoggerFactory.getLogger(CallerValidate.class);
 
-    public static Result endpoint(String endPoint)
+    public static Result level(Integer level)
     {
         LOG.trace(Pattern.ENTER, "Validating Privilege Level Range");
 
-        if (endPoint == null) {
-            return CallerResult.ENDPOINT_INVALID;
+        if (level == null) {
+            return CallerResult.PRIVILEGE_LEVEL_INVALID;
+
+        } else if (level == 0) {
+            return CallerResult.PRIVILEGE_LEVEL_INVALID;
 
         } else {
             return Result.VALID;
@@ -53,7 +51,7 @@ public class CallerValidate
         if (email == null) {
             return CallerResult.EMAIL_MISSING;
 
-        } else if (!EMAIL_VALIDATOR.isValid(email)) {
+        } else if (!Validate.EMAIL_VALIDATOR.isValid(email)) {
             return CallerResult.EMAIL_INVALID;
 
         } else {
@@ -66,7 +64,7 @@ public class CallerValidate
     {
         LOG.trace(Pattern.ENTER, "Validating SessionToken");
 
-        if (sessionToken == null){
+        if (sessionToken == null) {
             return CallerResult.SESSION_TOKEN_MISSING;
 
         } else {
@@ -98,7 +96,7 @@ public class CallerValidate
         if (ipAddress == null) {
             return CallerResult.IP_ADDRESS_MISSING;
 
-        } else if (!INET_VALIDATOR.isValid(ipAddress)) {
+        } else if (!Validate.INET_VALIDATOR.isValid(ipAddress)) {
             return CallerResult.IP_INVALID;
 
         } else {

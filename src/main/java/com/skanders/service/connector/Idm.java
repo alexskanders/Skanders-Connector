@@ -16,8 +16,8 @@
 
 package com.skanders.service.connector;
 
+import com.skanders.rms.base.result.Result;
 import com.skanders.rms.def.verify.RMSVerify;
-import com.skanders.rms.util.result.Result;
 import com.skanders.rms.util.socket.ServiceSocket;
 import com.skanders.rms.util.socket.ServiceSocketFactory;
 import com.skanders.service.connector.caller.Caller;
@@ -31,19 +31,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 
-class Idm
+public class Idm
 {
+    private static final String sessionEP = "idm/caller/session";
+    private static final String privilegeEP = "idm/caller/privilege";
+
     private ServiceSocketFactory socketFactory;
-    private String sessionEP;
-    private String privilegeEP;
 
-    Idm(){}
+    Idm()
+    {
+    }
 
-    void init(String url, String sessionEP, String privilegeEP, String trustStoreFile, String trustStorePass)
+    void init(String url, String trustStoreFile, String trustStorePass)
     {
         this.socketFactory = ServiceSocketFactory.createFactory(url, MediaType.APPLICATION_JSON_TYPE);
-        this.sessionEP     = sessionEP;
-        this.privilegeEP   = privilegeEP;
 
         if (trustStoreFile != null && trustStorePass != null)
             this.socketFactory.withSSLContext(Commons.createSSLContext(trustStoreFile, trustStorePass));
@@ -67,11 +68,11 @@ class Idm
         return Result.VALID;
     }
 
-    public Result privilege(@Nonnull Caller caller, @Nonnull String endpoint)
+    public Result privilege(@Nonnull Caller caller, @Nonnull Integer level)
     {
         RMSVerify.checkNull(caller, "caller cannot be null");
 
-        PrivilegeResponse privilegeRM = checkPrivilege(caller, endpoint);
+        PrivilegeResponse privilegeRM = checkPrivilege(caller, level);
         Result result = privilegeRM.getResult();
 
         if (!result.equals(CallerResult.CALLER_LEVEL_SUFFICIENT))
@@ -80,19 +81,23 @@ class Idm
         return Result.VALID;
     }
 
-    private PrivilegeResponse checkPrivilege(@Nonnull Caller caller, @Nonnull String endpoint)
+    public ServiceSocketFactory getSocketFactory()
+    {
+        return socketFactory;
+    }
+
+    private PrivilegeResponse checkPrivilege(@Nonnull Caller caller, @Nonnull Integer level)
     {
         RMSVerify.checkNull(caller, "caller cannot be null");
 
         MultivaluedHashMap<String, Object> queries = new MultivaluedHashMap<>();
-            queries.add("endpoint", endpoint);
+        queries.add("level", level);
 
         ServiceSocket socket = socketFactory.createSocket(privilegeEP)
                 .headers(caller.toHeader())
                 .queries(queries);
 
-        try (Response response = socket.get())
-        {
+        try (Response response = socket.get()) {
             return response.readEntity(PrivilegeResponse.class);
         }
     }
@@ -105,8 +110,7 @@ class Idm
         ServiceSocket socket = socketFactory.createSocket(sessionEP)
                 .headers(caller.toHeader());
 
-        try (Response response = socket.get())
-        {
+        try (Response response = socket.get()) {
             return response.readEntity(SessionResponse.class);
         }
     }

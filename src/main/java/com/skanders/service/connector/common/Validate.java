@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package com.skanders.service.connector;
+package com.skanders.service.connector.common;
 
-public class Service
+import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.commons.validator.routines.InetAddressValidator;
+
+public class Validate
 {
-    public static final Idm IDM;
-
-    static {
-        IDM = new Idm();
-    }
-
-    static void initIdm(String url, String trustStoreFile, String trustStorePass)
-    {
-        IDM.init(url, trustStoreFile, trustStorePass);
-    }
+    public static final InetAddressValidator INET_VALIDATOR = InetAddressValidator.getInstance();
+    public static final EmailValidator EMAIL_VALIDATOR = EmailValidator.getInstance();
 }
