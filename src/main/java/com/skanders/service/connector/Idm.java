@@ -24,7 +24,6 @@ import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.CallerResult;
 import com.skanders.service.connector.caller.response.PrivilegeResponse;
 import com.skanders.service.connector.caller.response.SessionResponse;
-import com.skanders.service.connector.common.Commons;
 
 import javax.annotation.Nonnull;
 import javax.ws.rs.core.MediaType;
@@ -47,7 +46,7 @@ public class Idm
         this.socketFactory = ServiceSocketFactory.createFactory(url, MediaType.APPLICATION_JSON_TYPE);
 
         if (trustStoreFile != null && trustStorePass != null)
-            this.socketFactory.withSSLContext(Commons.createSSLContext(trustStoreFile, trustStorePass));
+            this.socketFactory.withTrustStore(trustStoreFile, trustStorePass);
     }
 
     public Result session(@Nonnull Caller caller)

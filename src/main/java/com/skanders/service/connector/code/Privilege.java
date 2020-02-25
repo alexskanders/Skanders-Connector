@@ -16,6 +16,8 @@
 
 package com.skanders.service.connector.code;
 
+import com.skanders.rms.def.exception.RMSException;
+
 /**
  * Privilege rolls with levels 1-5 Reserved and User purpose set to level 100
  * (Lower) to leave room for higher custom levels.
@@ -29,4 +31,30 @@ public class Privilege
     public static final int ENGINEER = 5;
 
     public static final int USER = 100;
+
+    public static void validate(String level)
+    {
+        switch (level.toUpperCase().trim()) {
+            case "ROOT":
+            case "OWNER":
+            case "ADMIN":
+            case "MANAGER":
+            case "ENGINEER":
+            case "USER":
+                break;
+            default:
+                try {
+                    int intLevel = Integer.parseInt(level);
+
+                    if (intLevel >= ROOT && intLevel <= ENGINEER || intLevel == USER)
+                        break;
+                    else if (intLevel < 1)
+                        throw new RMSException("Privilege level is invalid, custom level must be greater than 0, given: " + intLevel);
+
+                } catch (NumberFormatException e) {
+                    throw new RMSException("Privilege level is invalid: " + level);
+
+                }
+        }
+    }
 }
