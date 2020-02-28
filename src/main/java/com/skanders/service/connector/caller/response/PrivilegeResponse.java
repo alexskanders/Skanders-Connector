@@ -16,9 +16,12 @@
 
 package com.skanders.service.connector.caller.response;
 
-import com.skanders.rms.base.model.ResponseModel;
+
+import com.skanders.commons.model.ResponseModel;
 
 public class PrivilegeResponse extends ResponseModel
 {
-    public PrivilegeResponse(){}
+    public PrivilegeResponse()
+    {
+    }
 }

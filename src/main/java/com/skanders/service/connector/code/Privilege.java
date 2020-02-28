@@ -16,7 +16,8 @@
 
 package com.skanders.service.connector.code;
 
-import com.skanders.rms.def.exception.RMSException;
+
+import com.skanders.commons.def.SkandersException;
 
 /**
  * Privilege rolls with levels 1-5 Reserved and User purpose set to level 100
@@ -24,10 +25,10 @@ import com.skanders.rms.def.exception.RMSException;
  */
 public class Privilege
 {
-    public static final int ROOT = 1;
-    public static final int OWNER = 2;
-    public static final int ADMIN = 3;
-    public static final int MANAGER = 4;
+    public static final int ROOT     = 1;
+    public static final int OWNER    = 2;
+    public static final int ADMIN    = 3;
+    public static final int MANAGER  = 4;
     public static final int ENGINEER = 5;
 
     public static final int USER = 100;
@@ -58,12 +59,12 @@ public class Privilege
                     if (intLevel >= ROOT && intLevel <= ENGINEER || intLevel == USER || intLevel == GUEST)
                         return intLevel;
                     else if (intLevel < 1)
-                        throw new RMSException("Privilege level is invalid, custom level must be greater than 0, given: " + intLevel);
+                        throw new SkandersException("Privilege level is invalid, custom level must be greater than 0, given: " + intLevel);
                     else
                         return intLevel;
 
                 } catch (NumberFormatException e) {
-                    throw new RMSException("Privilege level is invalid: " + level);
+                    throw new SkandersException("Privilege level is invalid: " + level);
 
                 }
         }

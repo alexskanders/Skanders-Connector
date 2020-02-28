@@ -16,17 +16,15 @@
 
 package com.skanders.service.connector.handler;
 
-import com.skanders.rms.base.model.RequestModel;
-import com.skanders.rms.base.model.ResponseModel;
-import com.skanders.rms.base.result.Result;
+import com.skanders.commons.model.RequestModel;
+import com.skanders.commons.model.ResponseModel;
+import com.skanders.commons.result.Result;
 import com.skanders.service.connector.caller.Caller;
 
-import javax.ws.rs.core.Response;
 
 public class Handler
 {
-    public static
-    <Req extends RequestModel, Res extends ResponseModel>
+    public static <Req extends RequestModel, Res extends ResponseModel>
     boolean isValid(Caller caller, Req request, Res response)
     {
         Result result;
@@ -39,8 +37,7 @@ public class Handler
         return result.notValid(response);
     }
 
-    public static
-    <Res extends ResponseModel>
+    public static <Res extends ResponseModel>
     boolean isValid(Caller caller, Res response)
     {
         Result result;

@@ -16,19 +16,20 @@
 
 package com.skanders.service.connector;
 
-import com.skanders.rms.base.config.RMSConfig;
-import com.skanders.rms.base.config.RMSProperties;
+
+import com.skanders.commons.config.Config;
+import com.skanders.rms.config.RMSConfig;
 
 public class ServiceConfig extends RMSConfig
 {
-    public ServiceConfig(RMSProperties prop)
+    public ServiceConfig(Config prop)
     {
         super(prop);
 
         initIdmConnector(prop);
     }
 
-    private void initIdmConnector(RMSProperties prop)
+    private void initIdmConnector(Config prop)
     {
         String idmUrl = prop.getReqStr("connector.idm.url");
 

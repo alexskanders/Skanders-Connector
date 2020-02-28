@@ -17,14 +17,16 @@
 package com.skanders.service.connector.caller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skanders.rms.base.model.ResponseModel;
+import com.skanders.commons.model.ResponseModel;
 
 public class SessionResponse extends ResponseModel
 {
     @JsonProperty("sessionToken")
     private String sessionToken;
 
-    public SessionResponse(){}
+    public SessionResponse()
+    {
+    }
 
     public String getSessionToken()
     {

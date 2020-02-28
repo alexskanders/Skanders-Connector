@@ -16,14 +16,15 @@
 
 package com.skanders.service.connector;
 
-import com.skanders.rms.base.result.Result;
-import com.skanders.rms.def.verify.RMSVerify;
-import com.skanders.rms.util.socket.ServiceSocket;
-import com.skanders.rms.util.socket.ServiceSocketFactory;
+import com.skanders.commons.def.Verify;
+import com.skanders.commons.result.Result;
+import com.skanders.commons.socket.HttpSocket;
+import com.skanders.commons.socket.HttpSocketFactory;
 import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.CallerResult;
 import com.skanders.service.connector.caller.response.PrivilegeResponse;
 import com.skanders.service.connector.caller.response.SessionResponse;
+import com.skanders.service.connector.common.Builder;
 
 import javax.annotation.Nonnull;
 import javax.ws.rs.core.MediaType;
@@ -32,10 +33,10 @@ import javax.ws.rs.core.Response;
 
 public class Idm
 {
-    private static final String sessionEP = "idm/caller/session";
+    private static final String sessionEP   = "idm/caller/session";
     private static final String privilegeEP = "idm/caller/privilege";
 
-    private ServiceSocketFactory socketFactory;
+    private HttpSocketFactory socketFactory;
 
     Idm()
     {
@@ -43,21 +44,21 @@ public class Idm
 
     void init(String url, String trustStoreFile, String trustStorePass)
     {
-        this.socketFactory = ServiceSocketFactory.createFactory(url, MediaType.APPLICATION_JSON_TYPE);
+        this.socketFactory = HttpSocketFactory.createFactory(url, MediaType.APPLICATION_JSON_TYPE);
 
         if (trustStoreFile != null && trustStorePass != null)
-            this.socketFactory.withTrustStore(trustStoreFile, trustStorePass);
+            this.socketFactory.withSSLContext(Builder.sslContext(trustStoreFile, trustStorePass));
     }
 
     public Result session(@Nonnull Caller caller)
     {
-        RMSVerify.checkNull(caller, "caller cannot be null");
+        Verify.notNull(caller, "caller cannot be null");
 
         if (caller.getType() == Caller.Type.GUEST)
             return Result.VALID;
 
         SessionResponse sessionRM = checkSession(caller);
-        Result result = sessionRM.getResult();
+        Result          result    = sessionRM.getResult();
 
         if (!result.equals(CallerResult.SESSION_ACTIVE))
             return result;
@@ -69,10 +70,10 @@ public class Idm
 
     public Result privilege(@Nonnull Caller caller, @Nonnull Integer level)
     {
-        RMSVerify.checkNull(caller, "caller cannot be null");
+        Verify.notNull(caller, "caller cannot be null");
 
         PrivilegeResponse privilegeRM = checkPrivilege(caller, level);
-        Result result = privilegeRM.getResult();
+        Result            result      = privilegeRM.getResult();
 
         if (!result.equals(CallerResult.CALLER_LEVEL_SUFFICIENT))
             return result;
@@ -80,19 +81,19 @@ public class Idm
         return Result.VALID;
     }
 
-    public ServiceSocketFactory getSocketFactory()
+    public HttpSocketFactory getSocketFactory()
     {
         return socketFactory;
     }
 
     private PrivilegeResponse checkPrivilege(@Nonnull Caller caller, @Nonnull Integer level)
     {
-        RMSVerify.checkNull(caller, "caller cannot be null");
+        Verify.notNull(caller, "caller cannot be null");
 
         MultivaluedHashMap<String, Object> queries = new MultivaluedHashMap<>();
         queries.add("level", level);
 
-        ServiceSocket socket = socketFactory.createSocket(privilegeEP)
+        HttpSocket socket = socketFactory.createSocket(privilegeEP)
                 .headers(caller.toHeader())
                 .queries(queries);
 
@@ -103,10 +104,10 @@ public class Idm
 
     private SessionResponse checkSession(@Nonnull Caller caller)
     {
-        RMSVerify.checkNull(caller, "caller cannot be null");
-        RMSVerify.argument(caller.getType() == Caller.Type.GUEST, "Cannot call checkSession() on Visitor");
+        Verify.notNull(caller, "caller cannot be null");
+        Verify.notTrue(caller.getType() == Caller.Type.GUEST, "Cannot call checkSession() on Visitor");
 
-        ServiceSocket socket = socketFactory.createSocket(sessionEP)
+        HttpSocket socket = socketFactory.createSocket(sessionEP)
                 .headers(caller.toHeader());
 
         try (Response response = socket.get()) {

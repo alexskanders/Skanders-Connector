@@ -16,10 +16,10 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.rms.base.result.Result;
+import com.skanders.commons.result.Result;
 import com.skanders.service.connector.caller.validate.CallerValidate;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MultivaluedHashMap;
 
@@ -32,7 +32,8 @@ public class Caller
     public static final String TRANSACTION_TOKEN = "transaction-token";
     public static final String SESSION_TOKEN     = "session-token";
 
-    public enum Type { USER, GUEST}
+    public enum Type
+    {USER, GUEST}
 
     private String ipAddress;
     private String transactionToken;
@@ -47,10 +48,10 @@ public class Caller
     {
         LOG.trace("Creating caller as a GUEST");
 
-        this.ipAddress = ipAddress;
+        this.ipAddress        = ipAddress;
         this.transactionToken = transactionToken;
-        this.email = null;
-        this.sessionToken = null;
+        this.email            = null;
+        this.sessionToken     = null;
 
         this.sessionTokenUpdated = false;
 
@@ -61,10 +62,10 @@ public class Caller
     {
         LOG.trace("Creating caller as a USER");
 
-        this.ipAddress = ipAddress;
+        this.ipAddress        = ipAddress;
         this.transactionToken = transactionToken;
-        this.email = email;
-        this.sessionToken = sessionToken;
+        this.email            = email;
+        this.sessionToken     = sessionToken;
 
         this.sessionTokenUpdated = false;
 
@@ -103,7 +104,7 @@ public class Caller
 
     public void updateSessionToken(String sessionToken)
     {
-        this.sessionToken = sessionToken;
+        this.sessionToken        = sessionToken;
         this.sessionTokenUpdated = true;
     }
 
@@ -119,13 +120,13 @@ public class Caller
         Result result;
 
         result = validateVisitor();
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         result = CallerValidate.email(email);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         result = CallerValidate.sessionToken(sessionToken);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         return Result.VALID;
     }
@@ -137,10 +138,10 @@ public class Caller
         Result result;
 
         result = CallerValidate.ipAddress(ipAddress);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         result = CallerValidate.transactionToken(transactionToken);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         return Result.VALID;
     }
@@ -148,8 +149,8 @@ public class Caller
     public MultivaluedHashMap<String, Object> toHeader()
     {
         MultivaluedHashMap<String, Object> headers = new MultivaluedHashMap<>();
-            headers.add(IP_ADDRESS, ipAddress);
-            headers.add(TRANSACTION_TOKEN, transactionToken);
+        headers.add(IP_ADDRESS, ipAddress);
+        headers.add(TRANSACTION_TOKEN, transactionToken);
 
         if (type == Type.USER) {
             headers.add(EMAIL, email);

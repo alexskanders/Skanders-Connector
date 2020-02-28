@@ -16,8 +16,8 @@
 
 package com.skanders.service.connector.caller.validate;
 
-import com.skanders.rms.base.result.Result;
-import com.skanders.rms.def.logger.Pattern;
+import com.skanders.commons.def.LogPattern;
+import com.skanders.commons.result.Result;
 import com.skanders.service.connector.caller.CallerFactory;
 import com.skanders.service.connector.caller.CallerResult;
 import com.skanders.service.connector.common.Validate;
@@ -30,7 +30,7 @@ public class CallerValidate
 
     public static Result level(Integer level)
     {
-        LOG.trace(Pattern.ENTER, "Validating Privilege Level Range");
+        LOG.trace(LogPattern.ENTER, "Validating Privilege Level Range");
 
         if (level == null) {
             return CallerResult.PRIVILEGE_LEVEL_INVALID;
@@ -46,7 +46,7 @@ public class CallerValidate
 
     public static Result email(String email)
     {
-        LOG.trace(Pattern.ENTER, "Validating  Email");
+        LOG.trace(LogPattern.ENTER, "Validating  Email");
 
         if (email == null) {
             return CallerResult.EMAIL_MISSING;
@@ -62,7 +62,7 @@ public class CallerValidate
 
     public static Result sessionToken(String sessionToken)
     {
-        LOG.trace(Pattern.ENTER, "Validating SessionToken");
+        LOG.trace(LogPattern.ENTER, "Validating SessionToken");
 
         if (sessionToken == null) {
             return CallerResult.SESSION_TOKEN_MISSING;
@@ -75,7 +75,7 @@ public class CallerValidate
 
     public static Result transactionToken(String transactionToken)
     {
-        LOG.trace(Pattern.ENTER, "Validating TransactionToken");
+        LOG.trace(LogPattern.ENTER, "Validating TransactionToken");
 
         if (transactionToken == null) {
             return CallerResult.TRANSACTION_TOKEN_MISSING;
@@ -91,7 +91,7 @@ public class CallerValidate
 
     public static Result ipAddress(String ipAddress)
     {
-        LOG.trace(Pattern.ENTER, "Validating IP Address");
+        LOG.trace(LogPattern.ENTER, "Validating IP Address");
 
         if (ipAddress == null) {
             return CallerResult.IP_ADDRESS_MISSING;

@@ -16,20 +16,20 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.rms.def.verify.RMSVerify;
-import com.skanders.rms.util.encrypt.SecureBytes;
+import com.skanders.commons.bytes.SecureBytes;
+import com.skanders.commons.def.Verify;
 import org.glassfish.grizzly.http.server.Request;
 
 import javax.ws.rs.core.HttpHeaders;
 
 public class CallerFactory
 {
-    public  static final int TRANSACTION_ID_LEN = 128;
+    public static final  int TRANSACTION_ID_LEN = 128;
     private static final int TOKEN_LENGTH       = TRANSACTION_ID_LEN / 2;
 
     public static Caller rebuildUser(HttpHeaders headers)
     {
-        RMSVerify.checkNull(headers, "headers cannot be null");
+        Verify.notNull(headers, "headers cannot be null");
 
         return new Caller(
                 headers.getHeaderString(Caller.IP_ADDRESS),
@@ -40,7 +40,7 @@ public class CallerFactory
 
     public static Caller rebuildGuest(HttpHeaders headers)
     {
-        RMSVerify.checkNull(headers, "headers cannot be null");
+        Verify.notNull(headers, "headers cannot be null");
 
         return new Caller(
                 headers.getHeaderString(Caller.IP_ADDRESS),
@@ -49,8 +49,8 @@ public class CallerFactory
 
     public static Caller asUser(Request userRequest, HttpHeaders headers)
     {
-        RMSVerify.checkNull(userRequest, "userRequest cannot be null");
-        RMSVerify.checkNull(headers,     "headers cannot be null");
+        Verify.notNull(userRequest, "userRequest cannot be null");
+        Verify.notNull(headers, "headers cannot be null");
 
         return new Caller(
                 userRequest.getRemoteAddr(),
@@ -61,7 +61,7 @@ public class CallerFactory
 
     public static Caller asGuest(Request userRequest)
     {
-        RMSVerify.checkNull(userRequest, "userRequest cannot be null");
+        Verify.notNull(userRequest, "userRequest cannot be null");
 
         return new Caller(userRequest.getRemoteAddr(), SecureBytes.gen16(TOKEN_LENGTH));
     }

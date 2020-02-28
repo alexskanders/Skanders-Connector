@@ -18,8 +18,8 @@ package com.skanders.service.connector.caller.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skanders.rms.base.model.RequestModel;
-import com.skanders.rms.base.result.Result;
+import com.skanders.commons.model.RequestModel;
+import com.skanders.commons.result.Result;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 
 public class PrivilegeRequest extends RequestModel
@@ -44,7 +44,7 @@ public class PrivilegeRequest extends RequestModel
         Result result;
 
         result = CallerValidate.level(level);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         return Result.VALID;
     }

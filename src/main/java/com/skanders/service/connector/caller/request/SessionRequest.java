@@ -18,8 +18,8 @@ package com.skanders.service.connector.caller.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skanders.rms.base.model.RequestModel;
-import com.skanders.rms.base.result.Result;
+import com.skanders.commons.model.RequestModel;
+import com.skanders.commons.result.Result;
 import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 
@@ -35,7 +35,7 @@ public class SessionRequest extends RequestModel
             @JsonProperty(value = "email", required = true) String email,
             @JsonProperty(value = "sessionToken", required = true) String sessionToken)
     {
-        this.email = email;
+        this.email        = email;
         this.sessionToken = sessionToken;
     }
 
@@ -54,10 +54,10 @@ public class SessionRequest extends RequestModel
         Result result;
 
         result = CallerValidate.sessionToken(sessionToken);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         result = CallerValidate.email(email);
-            if (result.notValid()) return result;
+        if (result.notValid()) return result;
 
         return Result.VALID;
     }
