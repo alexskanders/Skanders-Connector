@@ -18,7 +18,7 @@ package com.skanders.service.connector.code;
 
 public class Constants
 {
-    public static final int EMAIL_MIN = 3;
+    public static final int EMAIL_MIN = 4;
     public static final int EMAIL_MAX = 64;
 
     public static final int PASSWORD_MIN = 8;
