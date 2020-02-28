@@ -18,15 +18,13 @@ package com.skanders.service.connector.caller;
 
 import com.skanders.commons.bytes.SecureBytes;
 import com.skanders.commons.def.Verify;
+import com.skanders.service.connector.code.Constants;
 import org.glassfish.grizzly.http.server.Request;
 
 import javax.ws.rs.core.HttpHeaders;
 
 public class CallerFactory
 {
-    public static final  int TRANSACTION_ID_LEN = 128;
-    private static final int TOKEN_LENGTH       = TRANSACTION_ID_LEN / 2;
-
     public static Caller rebuildUser(HttpHeaders headers)
     {
         Verify.notNull(headers, "headers cannot be null");
@@ -54,7 +52,7 @@ public class CallerFactory
 
         return new Caller(
                 userRequest.getRemoteAddr(),
-                SecureBytes.gen16(TOKEN_LENGTH),
+                SecureBytes.gen16(Constants.TRANSACTION_TOKEN_BYTES),
                 headers.getHeaderString(Caller.EMAIL),
                 headers.getHeaderString(Caller.SESSION_TOKEN));
     }
@@ -63,6 +61,6 @@ public class CallerFactory
     {
         Verify.notNull(userRequest, "userRequest cannot be null");
 
-        return new Caller(userRequest.getRemoteAddr(), SecureBytes.gen16(TOKEN_LENGTH));
+        return new Caller(userRequest.getRemoteAddr(), SecureBytes.gen16(Constants.TRANSACTION_TOKEN_BYTES));
     }
 }

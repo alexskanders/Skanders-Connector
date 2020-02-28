@@ -18,8 +18,8 @@ package com.skanders.service.connector.caller.validate;
 
 import com.skanders.commons.def.LogPattern;
 import com.skanders.commons.result.Result;
-import com.skanders.service.connector.caller.CallerFactory;
 import com.skanders.service.connector.caller.CallerResult;
+import com.skanders.service.connector.code.Constants;
 import com.skanders.service.connector.common.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +67,9 @@ public class CallerValidate
         if (sessionToken == null) {
             return CallerResult.SESSION_TOKEN_MISSING;
 
+        } else if (sessionToken.length() != Constants.SESSION_TOKEN_HEX_LEN) {
+            return CallerResult.SESSION_INVALID_TOKEN;
+
         } else {
             return Result.VALID;
 
@@ -80,7 +83,7 @@ public class CallerValidate
         if (transactionToken == null) {
             return CallerResult.TRANSACTION_TOKEN_MISSING;
 
-        } else if (transactionToken.length() != CallerFactory.TRANSACTION_ID_LEN) {
+        } else if (transactionToken.length() != Constants.TRANSACTION_TOKEN_HEX_LEN) {
             return CallerResult.TRANSACTION_INVALID_TOKEN;
 
         } else {
