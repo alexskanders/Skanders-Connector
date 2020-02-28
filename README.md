@@ -1,4 +1,4 @@
-# Skander Connector
+# Skanders Connector
 
 [![license badge](https://img.shields.io/github/license/alexskanders/Skanders-Connector?logo=apache)](https://github.com/alexskanders/Skanders-Connector/blob/master/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/com.skanders.service/skanders-connector)](https://search.maven.org/search?q=g:%22com.skanders.skanders%22%20AND%20a:%22skanders-connector%22)
