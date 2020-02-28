@@ -31,10 +31,10 @@ public class Handler
 
         result = caller.validate();
         if (result.notValid(response))
-            return true;
+            return false;
 
         result = request.validate();
-        return result.notValid(response);
+        return !result.notValid(response);
     }
 
     public static <Res extends ResponseModel>
@@ -43,6 +43,6 @@ public class Handler
         Result result;
 
         result = caller.validate();
-        return result.notValid(response);
+        return !result.notValid(response);
     }
 }

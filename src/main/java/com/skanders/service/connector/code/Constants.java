@@ -22,7 +22,7 @@ public class Constants
     public static final int EMAIL_MAX = 64;
 
     public static final int PASSWORD_MIN = 8;
-    public static final int PASSWORD_MAX = 64;
+    public static final int PASSWORD_MAX = 32;
 
     public static final int SESSION_TOKEN_BITS    = 512;
     public static final int SESSION_TOKEN_BYTES   = SESSION_TOKEN_BITS / 8;
