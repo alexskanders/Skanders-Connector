@@ -98,7 +98,10 @@ public class Idm
                 .queries(queries);
 
         try (Response response = socket.get()) {
-            return response.readEntity(PrivilegeResponse.class);
+            PrivilegeResponse responseModel = response.readEntity(PrivilegeResponse.class);
+
+            responseModel.setStatus(response.getStatus());
+            return responseModel;
         }
     }
 
@@ -111,7 +114,10 @@ public class Idm
                 .headers(caller.toHeader());
 
         try (Response response = socket.get()) {
-            return response.readEntity(SessionResponse.class);
+            SessionResponse responseModel = response.readEntity(SessionResponse.class);
+
+            responseModel.setStatus(response.getStatus());
+            return responseModel;
         }
     }
 }

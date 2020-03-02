@@ -16,9 +16,25 @@
 
 package com.skanders.service.connector.code;
 
+import com.skanders.commons.def.SkandersException;
+
 public class User
 {
     public static final int ACTIVE = 1;
     public static final int LOCKED = 2;
     public static final int CLOSED = 3;
+
+    public static int validate(String level)
+    {
+        switch (level.toUpperCase().trim()) {
+            case "ACTIVE":
+                return ACTIVE;
+            case "LOCKED":
+                return LOCKED;
+            case "CLOSED":
+                return CLOSED;
+            default:
+                throw new SkandersException("User level is invalid: " + level);
+        }
+    }
 }

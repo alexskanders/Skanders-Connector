@@ -82,5 +82,4 @@ public final class CallerResult
         CALLER_EMAIL_NOT_FOUND = Result.declare(130, "User email not found");
         MISMATCHED_CALLER      = Result.declare(131, "User and requester are different");
     }
-
 }
