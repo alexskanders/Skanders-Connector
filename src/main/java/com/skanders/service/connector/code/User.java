@@ -16,7 +16,7 @@
 
 package com.skanders.service.connector.code;
 
-import com.skanders.commons.def.SkandersException;
+import com.skanders.jbel.def.SkandersException;
 
 public class User
 {

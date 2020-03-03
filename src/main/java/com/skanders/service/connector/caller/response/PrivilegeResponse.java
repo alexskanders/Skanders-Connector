@@ -17,7 +17,7 @@
 package com.skanders.service.connector.caller.response;
 
 
-import com.skanders.commons.model.ResponseModel;
+import com.skanders.jbel.model.ResponseModel;
 
 public class PrivilegeResponse extends ResponseModel
 {

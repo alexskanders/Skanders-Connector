@@ -16,10 +16,10 @@
 
 package com.skanders.service.connector;
 
-import com.skanders.commons.def.Verify;
-import com.skanders.commons.result.Result;
-import com.skanders.commons.socket.HttpSocket;
-import com.skanders.commons.socket.HttpSocketFactory;
+import com.skanders.jbel.def.Verify;
+import com.skanders.jbel.result.Result;
+import com.skanders.jbel.socket.HttpSocket;
+import com.skanders.jbel.socket.HttpSocketFactory;
 import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.CallerResult;
 import com.skanders.service.connector.caller.response.PrivilegeResponse;
@@ -44,7 +44,7 @@ public class Idm
 
     void init(String url, String trustStoreFile, String trustStorePass)
     {
-        this.socketFactory = HttpSocketFactory.createFactory(url, MediaType.APPLICATION_JSON_TYPE);
+        this.socketFactory = HttpSocketFactory.newInstance(url, MediaType.APPLICATION_JSON_TYPE);
 
         if (trustStoreFile != null && trustStorePass != null)
             this.socketFactory.withSSLContext(Builder.sslContext(trustStoreFile, trustStorePass));

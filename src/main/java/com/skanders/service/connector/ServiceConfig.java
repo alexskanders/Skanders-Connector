@@ -17,7 +17,7 @@
 package com.skanders.service.connector;
 
 
-import com.skanders.commons.config.Config;
+import com.skanders.jbel.config.Config;
 import com.skanders.rms.config.RMSConfig;
 
 public class ServiceConfig extends RMSConfig

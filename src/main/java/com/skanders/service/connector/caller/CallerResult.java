@@ -16,7 +16,7 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.commons.result.Result;
+import com.skanders.jbel.result.Result;
 
 import javax.ws.rs.core.Response.Status;
 

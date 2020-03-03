@@ -18,8 +18,8 @@ package com.skanders.service.connector.caller.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.skanders.commons.model.RequestModel;
-import com.skanders.commons.result.Result;
+import com.skanders.jbel.model.RequestModel;
+import com.skanders.jbel.result.Result;
 import com.skanders.service.connector.caller.Caller;
 import com.skanders.service.connector.caller.validate.CallerValidate;
 

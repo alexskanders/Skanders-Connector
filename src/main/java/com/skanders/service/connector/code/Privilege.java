@@ -17,7 +17,7 @@
 package com.skanders.service.connector.code;
 
 
-import com.skanders.commons.def.SkandersException;
+import com.skanders.jbel.def.SkandersException;
 
 /**
  * Privilege rolls with levels 1-5 Reserved and User purpose set to level 100

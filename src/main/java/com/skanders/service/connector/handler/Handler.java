@@ -16,9 +16,9 @@
 
 package com.skanders.service.connector.handler;
 
-import com.skanders.commons.model.RequestModel;
-import com.skanders.commons.model.ResponseModel;
-import com.skanders.commons.result.Result;
+import com.skanders.jbel.model.RequestModel;
+import com.skanders.jbel.model.ResponseModel;
+import com.skanders.jbel.result.Result;
 import com.skanders.service.connector.caller.Caller;
 
 

@@ -16,8 +16,8 @@
 
 package com.skanders.service.connector.caller;
 
-import com.skanders.commons.bytes.SecureBytes;
-import com.skanders.commons.def.Verify;
+import com.skanders.jbel.bytes.SecureBytes;
+import com.skanders.jbel.def.Verify;
 import com.skanders.service.connector.code.Constants;
 import org.glassfish.grizzly.http.server.Request;
 

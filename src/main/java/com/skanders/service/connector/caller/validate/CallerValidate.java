@@ -16,8 +16,8 @@
 
 package com.skanders.service.connector.caller.validate;
 
-import com.skanders.commons.def.LogPattern;
-import com.skanders.commons.result.Result;
+import com.skanders.jbel.def.LogPattern;
+import com.skanders.jbel.result.Result;
 import com.skanders.service.connector.caller.CallerResult;
 import com.skanders.service.connector.code.Constants;
 import com.skanders.service.connector.common.Validate;

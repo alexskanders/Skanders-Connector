@@ -21,6 +21,6 @@ import org.apache.commons.validator.routines.InetAddressValidator;
 
 public class Validate
 {
-    public static final InetAddressValidator INET_VALIDATOR = InetAddressValidator.getInstance();
-    public static final EmailValidator EMAIL_VALIDATOR = EmailValidator.getInstance();
+    public static final InetAddressValidator INET_VALIDATOR  = InetAddressValidator.getInstance();
+    public static final EmailValidator       EMAIL_VALIDATOR = EmailValidator.getInstance();
 }
