@@ -10,13 +10,13 @@ Maven:
 <dependency>
     <groupId>com.skanders.service</groupId>
     <artifactId>skanders-connector</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
 </dependency>
 ~~~
 
 Gradle:
 ~~~javascript
-implementation 'com.skanders.service:skanders-connector:0.8.0'
+implementation 'com.skanders.service:skanders-connector:0.9.0'
 ~~~
 
 ## 
